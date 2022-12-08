@@ -1,0 +1,25 @@
+uuid: 2c9f8c12-85fb-4ec3-b8a2-d16803b48729
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.square_large
+    - image.style.square_medium
+    - image.style.square_small
+_core:
+  default_config_hash: GpF5bxrG-809dulakRzRzswnfW135gT5VYvGHrySCsQ
+id: square
+label: Square
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: 100vw
+      sizes_image_styles:
+        - square_large
+        - square_medium
+        - square_small
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: square_medium
