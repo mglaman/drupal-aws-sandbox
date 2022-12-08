@@ -92,11 +92,3 @@ $ddev_settings = __DIR__ . '/settings.ddev.php';
 if (getenv('IS_DDEV_PROJECT') === 'true' && is_readable($ddev_settings)) {
   require $ddev_settings;
 }
-$databases['default']['default'] = array (
-  'database' => '../private/db.sqlite',
-  'prefix' => '',
-  'namespace' => 'Drupal\\sqlite\\Driver\\Database\\sqlite',
-  'driver' => 'sqlite',
-  'autoload' => 'core/modules/sqlite/src/Driver/Database/sqlite/',
-);
-$settings['hash_salt'] = 'R98TeZIdHXo77Gy2eKUYwJ-xms-Wl4roJM6P2EWRQN-4iQHvg8lAWu-llt_wqKQCi2FTuInlLQ';
