@@ -65,6 +65,8 @@ RUN set -eux; \
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*
 
+RUN pecl install apcu; docker-php-ext-enable apcu
+
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN { \
@@ -83,7 +85,9 @@ RUN set -eux; \
     sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf; \
     sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf;
 
-RUN pecl install apcu; docker-php-ext-enable apcu
+RUN set -eux; \
+    sed -ri -e 's!Listen 80!Listen ${APACHE_PORT}!' /etc/apache2/ports.conf; \
+    sed -ri -e 's!VirtualHost \*:80!VirtualHost \*:${APACHE_PORT}!' /etc/apache2/sites-available/*.conf;
 
 # Copy precompiled codebase into the container.
 COPY --from=vendor /app/ /var/www/html/
@@ -99,8 +103,7 @@ RUN chown -R www-data:www-data web/sites/default/files
 
 # Adjust the Apache docroot.
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/web
-
-EXPOSE 80
+ENV APACHE_PORT=8080
 
 USER www-data
 CMD ["/usr/bin/docker-entrypoint.sh"]
