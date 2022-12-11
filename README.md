@@ -1,6 +1,9 @@
 # drupal-aws-sandbox
 
-Deploys a Drupal site to AWS using App Runner, S3 object storage, Aurora Serverless, and more.
+Deploys a Drupal site to AWS using App Runner, S3, RDS, etc.
+
+Originally this was testing out Aurora Serverless, but the cost is greater than
+a lower tier RDS constantly running.
 
 ## local build and test
 

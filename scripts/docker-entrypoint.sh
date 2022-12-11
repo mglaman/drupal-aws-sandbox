@@ -6,6 +6,6 @@ set -o pipefail
 apache2-foreground &
 
 php vendor/bin/drush status
-#php vendor/bin/drush deploy
+php vendor/bin/drush deploy
 
 wait -n
